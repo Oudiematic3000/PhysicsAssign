@@ -28,12 +28,14 @@ public class CountDown : MonoBehaviour
         else
         {
             done = true;
+            gameObject.SetActive(false);
         }
 
     }
 
     public void resetCount()
     {
+        gameObject.SetActive(true);
         done=false;
         counter.text = "3";
         count = 3;

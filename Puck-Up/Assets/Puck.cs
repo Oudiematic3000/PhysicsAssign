@@ -20,9 +20,14 @@ public class Puck : MonoBehaviour
     [SerializeField]
     private SpriteRenderer spriteRenderer;
     private Color iColor;
-    public bool playerLastTouch = false;
+    public bool playerLastTouch;
     [SerializeField]
     private LogicManagerScript lms;
+    public bool firstTouch=true;
+    [SerializeField]
+    private Mallet mallet;
+    [SerializeField]
+    private Shaker shaker;
     // Start is called before the first frame update
     void Start()
     {
@@ -74,11 +79,26 @@ public class Puck : MonoBehaviour
     {
         transform.position = Vector2.zero;
         rb.velocity = Random.insideUnitSphere;
+        firstTouch = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-       
+        if (collision.GetContact(0).collider.GetComponent<AIScript>() != null)
+        {
+            if (firstTouch)
+            {
+                lms.AIAddScore();
+            }
+            firstTouch = false;
+        }else if(collision.GetContact(0).collider.GetComponent<Mallet>() != null)
+        {
+            if (firstTouch)
+            {
+                lms.playerAddScore();
+            }
+            firstTouch = false;
+        }
 
         if(collision.GetContact(0).collider.GetComponent<Mallet>() != null)
         {
@@ -102,7 +122,14 @@ public class Puck : MonoBehaviour
                 playerLastTouch = false;
             }
         }
+        if((collision.GetContact(0).collider.GetComponent<Mallet>() != null || collision.GetContact(0).collider.GetComponent<AIScript>() != null) && collision.relativeVelocity.magnitude>40)
+        {
+           StartCoroutine(shaker.shake());
+           
+            
+        }
     }
+    
 }
 
 

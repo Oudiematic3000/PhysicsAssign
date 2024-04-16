@@ -28,11 +28,11 @@ public class AIScript : MonoBehaviour
         {
             rb.MovePosition(transform.position + (new Vector3(0, 8, 0) * 1 * Time.deltaTime));
         }
-        else if (puck.GetComponent<Rigidbody2D>().velocity.magnitude < 3 && puck.transform.position.y > 0)
+        else if (puck.GetComponent<Rigidbody2D>().velocity.magnitude < 3.75 && puck.transform.position.y > 0)
         {
             rb.MovePosition((Vector2)transform.position + (direction * 15 * Time.deltaTime));
         }
-        else if (puck.transform.position.y > 5)
+        else if (puck.transform.position.y > 4)
         {
             rb.MovePosition((Vector2)transform.position + (direction * 15 * Time.deltaTime));
         }

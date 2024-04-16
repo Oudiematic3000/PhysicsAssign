@@ -32,11 +32,16 @@ public class Supercharger : MonoBehaviour
                 lms.AIAddScore();
             }
         }
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        puck.uncharge();
+        if (collision.CompareTag("Puck"))
+        {
+            puck.uncharge();
+            Destroy(gameObject);
+        }
     }
     // Update is called once per frame
     void Update()

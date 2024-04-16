@@ -10,6 +10,8 @@ public class chargeSpawner : MonoBehaviour
     private float rate;
     [SerializeField]
     private Supercharger supCh;
+    [SerializeField]
+    private CountDown countdown;
     void Start()
     {
         
@@ -18,13 +20,28 @@ public class chargeSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     if(count<rate)
+        if (countdown.done)
         {
-            count += Time.deltaTime;
+            if (count < rate)
+            {
+                count += Time.deltaTime;
+            }
+            else
+            {
+
+                float xRand = Random.Range(-5, 5);
+                float yRand= Random.Range(-6, 6);
+                while((xRand>-2 && xRand < 2) && (yRand > -3 && yRand < 3))
+                {
+                    xRand = Random.Range(-5, 5);
+                    yRand = Random.Range(-6, 6);
+                }
+                Instantiate(supCh, new Vector3(xRand, yRand, 0), Quaternion.identity);
+                count = 0;
+            }
         }
         else
         {
-            Instantiate(supCh, new Vector3(Random.Range(-5, 5), Random.Range(-6, 6), 0), Quaternion.identity);
             count = 0;
         }
     }

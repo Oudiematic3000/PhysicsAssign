@@ -23,7 +23,23 @@ public class LogicManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (playerScore == 5)
+        {
+            SceneManager.LoadScene("Win");
+        }
+        if (AIScore==5)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
+        if(SceneManager.GetActiveScene().name.Equals("SampleScene") && Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("huh");
+            SceneManager.LoadScene("Menu");
+        }
+        if(SceneManager.GetActiveScene().name.Equals("Menu") && Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     public void playerAddScore()
@@ -41,14 +57,19 @@ public class LogicManagerScript : MonoBehaviour
     }
     public void playerSubScore()
     {
+        if (playerScore > 0) { 
         playerScore--;
         pScore.text = playerScore.ToString();
+    }
     }
 
     public void AISubScore()
     {
-        AIScore--;
-        aScore.text = AIScore.ToString();
+        if (AIScore > 0)
+        {
+            AIScore--;
+            aScore.text = AIScore.ToString();
+        }
     }
     
 }

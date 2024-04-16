@@ -43,4 +43,9 @@ public class Mallet : MonoBehaviour
         }
     }
 
+    public float GetVelocity()
+    {
+        return rb.velocity.magnitude;
+    }
+
 }
