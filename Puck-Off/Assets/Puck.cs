@@ -86,14 +86,14 @@ public class Puck : MonoBehaviour
     {
         if (collision.GetContact(0).collider.GetComponent<AIScript>() != null)
         {
-            if (firstTouch)
+            if (firstTouch && !playerLastTouch)
             {
                 lms.AIAddScore();
             }
             firstTouch = false;
         }else if(collision.GetContact(0).collider.GetComponent<Mallet>() != null)
         {
-            if (firstTouch)
+            if (firstTouch && playerLastTouch)
             {
                 lms.playerAddScore();
             }
