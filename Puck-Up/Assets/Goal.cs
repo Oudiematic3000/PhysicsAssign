@@ -6,6 +6,8 @@ public class Goal : MonoBehaviour
 {
     [SerializeField]
     private LogicManagerScript lms;
+    [SerializeField]
+    private Puck puck;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,10 +26,12 @@ public class Goal : MonoBehaviour
         {
            
             lms.AIAddScore();
+            puck.resetPuck();
         }
         else
         {
             lms.playerAddScore();
+            puck.resetPuck();
         }
     }
 }

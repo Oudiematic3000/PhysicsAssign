@@ -14,15 +14,19 @@ public class Puck : MonoBehaviour
     private Vector2 lastVelocity;
     [SerializeField]
     private float maxSpeed;
+    [SerializeField]
+    private CountDown countDown;
     // Start is called before the first frame update
     void Start()
     {
-
+        
+        while (!countDown.done)
+        {
+            rb.Sleep();
+        }
+        rb.WakeUp();
         rb.gravityScale = 0;
-
-
-        rb.velocity= Random.insideUnitSphere;
-
+        rb.velocity = Random.insideUnitSphere;
     }
 
     // Update is called once per frame
@@ -41,6 +45,14 @@ public class Puck : MonoBehaviour
     {
 
         return rayDestination.point;
+    }
+
+    public void resetPuck()
+    {
+      
+
+        transform.position = Vector2.zero;
+        rb.velocity = Random.insideUnitSphere;
     }
 }
 

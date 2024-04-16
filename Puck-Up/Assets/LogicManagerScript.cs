@@ -30,13 +30,14 @@ public class LogicManagerScript : MonoBehaviour
     {
         playerScore++;
         pScore.text = playerScore.ToString();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
+        
     }
 
     public void AIAddScore()
     {
         AIScore++;
         aScore.text = AIScore.ToString();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
     }
+    
 }
