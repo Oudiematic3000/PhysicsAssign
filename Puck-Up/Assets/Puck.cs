@@ -19,33 +19,39 @@ public class Puck : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        while (!countDown.done)
-        {
-            rb.Sleep();
-        }
-        rb.WakeUp();
+
+        rb.constraints = RigidbodyConstraints2D.FreezePosition;
+
         rb.gravityScale = 0;
-        rb.velocity = Random.insideUnitSphere;
+        
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(!countDown.done)
+        {
+            rb.constraints = RigidbodyConstraints2D.FreezePosition;
+        }
+        rb.constraints = RigidbodyConstraints2D.None;
+        if (rb.velocity.magnitude < 0.1)
+        {
+            rb.velocity = Random.insideUnitSphere;
+        }
         lastVelocity = rb.velocity;
         if (rb.velocity.magnitude > maxSpeed)
         {
             rb.velocity = rb.velocity.normalized * maxSpeed*Time.deltaTime;
         }
 
-        rayDestination=Physics2D.Raycast(transform.position, rb.velocity.normalized, 50, 3);
+        if(transform.position.x<-7.5 ||  transform.position.x>7 ||transform.position.y<-14 ||transform.position.y>14) {
+            resetPuck();
+        }
+       
     }
 
-    public Vector2 getRayHit()
-    {
-
-        return rayDestination.point;
-    }
+   
 
     public void resetPuck()
     {

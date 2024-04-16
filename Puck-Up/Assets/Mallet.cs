@@ -11,6 +11,8 @@ public class Mallet : MonoBehaviour
     private Camera cam;
     [SerializeField]
     private Rigidbody2D rb;
+    [SerializeField]
+    private CountDown countDown;
   
 
     void OnMouseDown()
@@ -21,9 +23,12 @@ public class Mallet : MonoBehaviour
 
     void OnMouseDrag()
     {
-        Vector3 screenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
-        Vector3 pos = Camera.main.ScreenToWorldPoint(screenPoint) + offset;
-        rb.MovePosition(pos);
+        if (countDown.done)
+        {
+            Vector3 screenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+            Vector3 pos = Camera.main.ScreenToWorldPoint(screenPoint) + offset;
+            rb.MovePosition(pos);
+        }
     }
 
 }

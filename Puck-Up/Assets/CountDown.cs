@@ -18,12 +18,16 @@ public class CountDown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (count > 0) { 
-        count -= Time.deltaTime;
+        if (count > 0)
+        {
+            count -= Time.deltaTime;
             Mathf.FloorToInt(count);
-        counter.text = count.ToString("0");
-    }
-        done = true;
+            counter.text = count.ToString("0");
+        }
+        else
+        {
+            done = true;
+        }
     }
    
 }
