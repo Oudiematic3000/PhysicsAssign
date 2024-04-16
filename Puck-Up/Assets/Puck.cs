@@ -21,6 +21,8 @@ public class Puck : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Color iColor;
     public bool playerLastTouch = false;
+    [SerializeField]
+    private LogicManagerScript lms;
     // Start is called before the first frame update
     void Start()
     {
@@ -76,13 +78,29 @@ public class Puck : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+       
+
         if(collision.GetContact(0).collider.GetComponent<Mallet>() != null)
         {
-            playerLastTouch = true;
+            if (playerLastTouch)
+            {
+                lms.playerSubScore();
+            }
+            else
+            {
+                playerLastTouch = true;
+            }
         }
         else if(collision.GetContact(0).collider.GetComponent<AIScript>() != null)
         {
-            playerLastTouch=false;
+            if (!playerLastTouch)
+            {
+                lms.AISubScore();
+            }
+            else
+            {
+                playerLastTouch = false;
+            }
         }
     }
 }

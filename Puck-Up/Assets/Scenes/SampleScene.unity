@@ -2535,6 +2535,7 @@ MonoBehaviour:
   countDown: {fileID: 1903559874}
   spriteRenderer: {fileID: 1807242250}
   playerLastTouch: 0
+  lms: {fileID: 1448849295}
 --- !u!1001 &1876437100
 PrefabInstance:
   m_ObjectHideFlags: 0

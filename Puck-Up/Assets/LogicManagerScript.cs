@@ -39,5 +39,16 @@ public class LogicManagerScript : MonoBehaviour
         aScore.text = AIScore.ToString();
         
     }
+    public void playerSubScore()
+    {
+        playerScore--;
+        pScore.text = playerScore.ToString();
+    }
+
+    public void AISubScore()
+    {
+        AIScore--;
+        aScore.text = AIScore.ToString();
+    }
     
 }
