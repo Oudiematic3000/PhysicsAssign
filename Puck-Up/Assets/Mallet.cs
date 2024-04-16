@@ -13,13 +13,25 @@ public class Mallet : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField]
     private CountDown countDown;
-  
 
+    private void Start()
+    {
+        transform.position = new Vector3 (0, -8, 0);
+    }
+
+    public void resetMallet()
+    {
+        transform.position = new Vector3(0, -8, 0);
+
+    }
     void OnMouseDown()
   
     {
-        offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
-    }
+        if (countDown.done)
+        {
+            offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+        }
+        }
 
     void OnMouseDrag()
     {

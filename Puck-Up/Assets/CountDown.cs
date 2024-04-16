@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 
@@ -28,6 +29,13 @@ public class CountDown : MonoBehaviour
         {
             done = true;
         }
+
     }
-   
+
+    public void resetCount()
+    {
+        done=false;
+        counter.text = "3";
+        count = 3;
+    }   
 }

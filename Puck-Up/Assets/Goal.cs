@@ -8,6 +8,12 @@ public class Goal : MonoBehaviour
     private LogicManagerScript lms;
     [SerializeField]
     private Puck puck;
+    [SerializeField]
+    private CountDown countDown;
+    [SerializeField]
+    private Mallet mallet;
+    [SerializeField]
+    private AIScript ai;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,11 +33,18 @@ public class Goal : MonoBehaviour
            
             lms.AIAddScore();
             puck.resetPuck();
+            countDown.resetCount();
+            ai.resetMallet();
+            mallet.resetMallet();
+            
         }
         else
         {
             lms.playerAddScore();
             puck.resetPuck();
+            countDown.resetCount();
+            ai.resetMallet();
+            mallet.resetMallet();
         }
     }
 }

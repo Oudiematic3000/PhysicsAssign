@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Puck : MonoBehaviour
@@ -10,16 +11,20 @@ public class Puck : MonoBehaviour
     [SerializeField]
     private CircleCollider2D circleCollider;
     private RaycastHit2D rayDestination;
-
+    public bool isSuperCharged = false;
     private Vector2 lastVelocity;
     [SerializeField]
     private float maxSpeed;
     [SerializeField]
     private CountDown countDown;
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+    private Color iColor;
+    public bool playerLastTouch = false;
     // Start is called before the first frame update
     void Start()
     {
-
+        iColor = spriteRenderer.color;
         rb.constraints = RigidbodyConstraints2D.FreezePosition;
 
         rb.gravityScale = 0;
@@ -51,14 +56,34 @@ public class Puck : MonoBehaviour
        
     }
 
-   
+   public void superCharge()
+    {
+        isSuperCharged = true;
+        spriteRenderer.color = Color.yellow;
+    }
+
+    public void uncharge()
+    {
+        isSuperCharged=false;
+        spriteRenderer.color = iColor;
+    }
 
     public void resetPuck()
     {
-      
-
         transform.position = Vector2.zero;
         rb.velocity = Random.insideUnitSphere;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.GetContact(0).collider.GetComponent<Mallet>() != null)
+        {
+            playerLastTouch = true;
+        }
+        else if(collision.GetContact(0).collider.GetComponent<AIScript>() != null)
+        {
+            playerLastTouch=false;
+        }
     }
 }
 

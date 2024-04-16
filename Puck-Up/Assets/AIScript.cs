@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class AIScript : MonoBehaviour
@@ -15,6 +14,7 @@ public class AIScript : MonoBehaviour
     private CountDown countDown;
     void Start()
     {
+        transform.position = new Vector3(0, 8, 0);
 
     }
 
@@ -41,5 +41,11 @@ public class AIScript : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(puck.transform.position.x, 8, 0), 2 * Time.deltaTime);
         }
     }
+
+    }
+    public void resetMallet()
+    {
+        transform.position = new Vector3(0, 8, 0);
+        rb.velocity = Vector3.zero;
     }
 }
